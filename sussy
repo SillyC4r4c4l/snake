@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace higherlower
+{
+    public partial class Snake : Form
+    {
+        public enum Directions
+        {
+            Left,
+            Right,
+            Down,
+            Up
+        }
+        public static int rows = 20;
+        public static int cols = 20;
+        public static Directions dir;
+        Button[,] tileControls = new Button[rows, cols];
+        public Snake()
+        {
+            InitializeComponent();
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    Button btn = new Button()
+                    {
+                        Size = new Size(25, 25),
+                        Location = new Point(i * 20, j * 20),
+                        Visible = true,
+                        BackColor = Color.Black,
+                    };
+                    tileControls[i, j] = btn;
+                    this.Controls.Add(tileControls[i,j]);
+                }
+            }
+
+        }
+
+        private void KeyIsDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left) //if holding down left
+            {
+                dir = Directions.Left;
+            }
+            if (e.KeyCode == Keys.Right) //if holding down right
+            {
+                dir = Directions.Right;
+
+            }
+            if (e.KeyCode == Keys.Up) //if not holding down up
+            {
+                dir = Directions.Down;
+            }
+            if (e.KeyCode == Keys.Down) //if holding down 'down
+            {
+                dir = Directions.Up;
+            }
+        }
+
+        private void gameTimerTick(object sender, EventArgs e)
+        {
+            /*switch (dir)
+            {
+                case Directions.Right:
+                    //Snek[0]
+                    //break;
+
+
+            }
+            /*/
+        }
+    }
+}
